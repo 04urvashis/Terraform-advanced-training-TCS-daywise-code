@@ -1,0 +1,28 @@
+pipeline{
+    agent any
+    tools {
+     terraform 'Terraform'
+    }
+    
+    stages {
+        stage('checkout') {
+            steps {
+                checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/04urvashis/Terraform-Advanced-Training-TCS.git']]])
+                
+            }
+        }
+        
+        stage('Terrafrom init') {
+            steps {
+                bat("terraform init")
+            }
+        }
+        
+         stage('Terrafrom Action') {
+            steps {
+                echo"terraform action from the parameter is ->  ${action}"
+                bat("terraform ${action} --auto-approve")
+            }
+        }
+    }
+}
