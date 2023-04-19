@@ -23,3 +23,4 @@ variable "project_tags" {
     "project"    = "project-beta"
     "enviroment" = "dev"
   }
+}
